@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeLink • About Us</title>
+  <style>
+    :root {
+      --bg: #0f172a; 
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --brand-1: #f4a7c5; 
+      --brand-2: #c6b6f3; 
+      --brand-3: #8fd3f4;
+      --accent: #ff72a7;
+      --card: rgba(30,41,59,0.8);
+      --shadow: rgba(0,0,0,0.55);
+      --ring: rgba(255, 114, 167, 0.35);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    body {
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky; top:0; z-index:50;
+      backdrop-filter: saturate(180%) blur(14px);
+      background: rgba(15,23,42,0.85);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 1.2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .brand h1 { margin:0; font-size:1.8rem; background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3)); -webkit-background-clip:text; color:transparent; }
+    nav a { color: #cbd5e1; margin-left: 1rem; text-decoration: none; font-weight: 600; }
+    nav a:hover { color: var(--accent); }
+
+    .section { max-width: 1000px; margin: 2rem auto; padding: 1rem; }
+    .title { font-size: clamp(1.8rem, 3vw, 2.2rem); margin-bottom: 1rem; }
+    .card { background: var(--card); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 10px 18px var(--shadow); }
+    .card h3 { margin-top: 0; color: var(--brand-1); }
+    .pill { display:inline-block; padding: .3rem .6rem; border-radius:999px; background: rgba(255,114,167,.2); color: #f9a8d4; font-size: .85rem; margin-right: 0.5rem; }
+
+    footer { text-align:center; padding:2rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><h1>LifeLink</h1></div>
+  <nav>
+    <a href="frontpage.html">Home</a>
+    <a href="#mission">Mission</a>
+    <a href="#team">Team</a>
+    <a href="#values">Values</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="section" id="mission">
+  <h2 class="title">Our Mission</h2>
+  <div class="card">
+    <p>LifeLink exists to save lives by connecting organ donors with patients efficiently, ensuring transparent hospital coordination and seamless recovery tracking.</p>
+    <span class="pill">Transparency</span>
+    <span class="pill">Efficiency</span>
+    <span class="pill">Compassion</span>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <h2 class="title">Our Team</h2>
+  <div class="card">
+    <h3>Founders</h3>
+    <p>Our founders are engineers and healthcare enthusiasts dedicated to building a user-friendly organ donation platform.</p>
+  </div>
+  <div class="card">
+    <h3>Medical Advisors</h3>
+    <p>Experienced doctors guide LifeLink to ensure the system is medically sound and patient-centric.</p>
+  </div>
+</section>
+
+<section class="section" id="values">
+  <h2 class="title">Core Values</h2>
+  <div class="card">
+    <ul>
+      <li>Privacy & Security</li>
+      <li>Integrity & Accuracy</li>
+      <li>Hospital Collaboration</li>
+      <li>Patient-first Approach</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section center" id="contact">
+  <h2 class="title">Get in Touch</h2>
+  <div class="card">
+    <p>If you are a hospital, donor, or patient seeking guidance, reach out to us at <a href="mailto:contact@lifelink.com">contact@lifelink.com</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 LifeLink. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
