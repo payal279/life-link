@@ -5,22 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LifeLink • Connecting Lives</title>
   <style>
-    /* ====== THEME ====== */
     :root {
-      --bg: #0f172a; /* dark slate */
+      --bg: #0f172a; 
       --text: #f1f5f9;
       --muted: #94a3b8;
-      --brand-1: #f4a7c5; /* blush */
-      --brand-2: #c6b6f3; /* lavender */
-      --brand-3: #8fd3f4; /* aqua */
-      --accent: #ff72a7; /* hot pink */
+      --brand-1: #f4a7c5; 
+      --brand-2: #c6b6f3; 
+      --brand-3: #8fd3f4;
+      --accent: #ff72a7;
       --card: rgba(30,41,59,0.8);
       --shadow: rgba(0,0,0,0.55);
       --ring: rgba(255, 114, 167, 0.35);
       --border: rgba(255, 255, 255, 0.12);
     }
 
-    /* Alternate palettes */
     body[data-theme="mint"] {
       --brand-1: #a8edea; --brand-2: #fed6e3; --brand-3: #b8f1d5; --accent:#15c2b8;
     }
@@ -28,7 +26,7 @@
       --brand-1: #ff9a9e; --brand-2: #fad0c4; --brand-3: #fbc2eb; --accent:#ff758c;
     }
 
-    /* ====== RESET ====== */
+    /*RESET*/
     *, *::before, *::after { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
@@ -38,7 +36,7 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    /* ====== HEADER / NAV ====== */
+    /* HEADER / NAV */
     header {
       position: sticky; top: 0; z-index: 50;
       backdrop-filter: saturate(180%) blur(14px);
@@ -72,7 +70,7 @@
     }
     nav a:hover::after { transform: scaleX(1); }
 
-    /* ====== HERO ====== */
+    /*HERO*/
     .hero {
       position: relative; overflow: hidden;
       background: radial-gradient(1200px 600px at 0% 0%, var(--brand-2) 0%, transparent 60%),
@@ -108,7 +106,7 @@
     .o5{ top: 28%; left: 52%; } .o6{ top: 75%; left: 8%; }
     .o7{ top: 12%; left: 70%; } .o8{ top: 56%; left: 78%; }
 
-    /* ====== FEATURE GRID ====== */
+    /*FEATURE GRID*/
     .section { max-width: 1200px; margin: 0 auto; padding: 3.2rem 1.25rem; }
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.2rem; }
     .card {
@@ -120,7 +118,7 @@
     .card h3 { margin: 0 0 .3rem; letter-spacing: .2px; }
     .pill { display: inline-block; padding: .35rem .7rem; border-radius: 999px; background: rgba(255,114,167,.2); color: #f9a8d4; font-size: .8rem; font-weight: 700; }
 
-    /* ====== HOSPITALS GRID ====== */
+    /*HOSPITALS GRID */
     .hospitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
     .hospital { position: relative; overflow: hidden; }
     .hospital .tag { position: absolute; top: .9rem; left: .9rem; }
@@ -137,7 +135,7 @@
       content: "🩺"; position: absolute; right: 12px; bottom: 6px; font-size: 64px; opacity: .15;
     }
 
-    /* ====== FOOTER ====== */
+    /*FOOTER */
     footer { text-align: center; padding: 2.4rem 1.2rem; color: var(--muted); }
 
     .title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin: 0 0 1rem; }
@@ -166,7 +164,6 @@
         <a href="#contact">Contact</a>
    
   
-  <!-- Ye 4 links tumhare login pages ko connect karenge -->
        <a href="admin-login.html">Admin</a>
        <a href="donor-login.html">Donor</a>
        <a href="hospital-login.html">Hospital</a>

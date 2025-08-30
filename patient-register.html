@@ -63,6 +63,26 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--ring);
     }
+    .password-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 1rem;
+      border-radius: 12px;
+      display: grid;
+      gap: 1rem;
+    }
+    .captcha-box {
+      display: grid;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .captcha-box strong {
+      font-family: monospace;
+      background: rgba(255,255,255,0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 2px;
+    }
     button {
       padding: 0.9rem 1.2rem;
       border-radius: 999px;
@@ -79,11 +99,12 @@
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 12px 22px var(--ring);
     }
+
   </style>
 </head>
 <body>
   <h2>Patient Registration Form</h2>
-  <form action="#" method="post">
+  <form action="submit" method="post">
     <!-- Personal Info -->
     <div>
       <label for="name">Full Name</label>
@@ -150,9 +171,31 @@
       <label for="hospital">Preferred Hospital</label>
       <input type="text" id="hospital" name="hospital" placeholder="Hospital Name" required />
     </div>
+    <!-- Password & Captcha Box -->
+    <div class="password-box">
+      <h3>Platform Login Credentials</h3>
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div>
+        <label for="password">Create Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div>
+        <label for="confirm-password">Retype Password</label>
+        <input type="password" id="confirm-password" name="confirm_password" required />
+      </div>
+      <div class="captcha-box">
+        <label>Enter Captcha: <strong>AB12CD</strong></label>
+        <input type="text" name="captcha" placeholder="Type the text above" required>
+        <small>Captcha is static for visual purposes</small>
+      </div>
+    </div>
 
-    <!-- Submit -->
-    <button type="submit">Register as Patient</button>
+</div>
+
+
   </form>
 </body>
 </html>
