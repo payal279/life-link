@@ -4,37 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LifeLink • Connecting Lives</title>
+  <header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true"></div>
+      <h1>LifeLink</h1>
+    </div>
+
+    <!-- Hamburger Toggle -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#hospitals">Hospitals</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
   <style>
-    :root {
-      --bg: #0f172a; 
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --brand-1: #f4a7c5; 
-      --brand-2: #c6b6f3; 
-      --brand-3: #8fd3f4;
-      --accent: #ff72a7;
-      --card: rgba(30,41,59,0.8);
-      --shadow: rgba(0,0,0,0.55);
-      --ring: rgba(255, 114, 167, 0.35);
-      --border: rgba(255, 255, 255, 0.12);
-    }
+    /* Hamburger styles */
+  .menu-toggle { display: none; }
+  .menu-btn {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+  }
+  .menu-btn span {
+    width: 25px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+  }
 
-    body[data-theme="mint"] {
-      --brand-1: #a8edea; --brand-2: #fed6e3; --brand-3: #b8f1d5; --accent:#15c2b8;
+  /* Responsive toggle */
+  @media (max-width: 768px) {
+    nav {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: var(--card);
+      flex-direction: column;
+      width: 200px;
+      display: none;
+      padding: 1rem;
+      border-radius: 8px;
     }
-    body[data-theme="sunset"] {
-      --brand-1: #ff9a9e; --brand-2: #fad0c4; --brand-3: #fbc2eb; --accent:#ff758c;
+    .menu-toggle:checked ~ nav {
+      display: flex;
     }
+    .menu-btn {
+      display: flex;
+    }
+    nav a { margin: .5rem 0; } /* vertical spacing */
+  }
 
-    /*RESET*/
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text); background: var(--bg);
-      line-height: 1.6; -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
+      :root {
+        --bg: #0f172a; 
+        --text: #f1f5f9;
+        --muted: #94a3b8;
+        --brand-1: #f4a7c5; 
+        --brand-2: #c6b6f3; 
+        --brand-3: #8fd3f4;
+        --accent: #ff72a7;
+        --card: rgba(30,41,59,0.8);
+        --shadow: rgba(0,0,0,0.55);
+        --ring: rgba(255, 114, 167, 0.35);
+        --border: rgba(255, 255, 255, 0.12);
+      }
+
+      body[data-theme="mint"] {
+        --brand-1: #a8edea; --brand-2: #fed6e3; --brand-3: #b8f1d5; --accent:#15c2b8;
+      }
+      body[data-theme="sunset"] {
+        --brand-1: #ff9a9e; --brand-2: #fad0c4; --brand-3: #fbc2eb; --accent:#ff758c;
+      }
+
+      /*RESET*/
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        color: var(--text); background: var(--bg);
+        line-height: 1.6; -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; text-decoration: none; }
 
     /* HEADER / NAV */
     header {
@@ -150,34 +211,6 @@
 </head>
 
 <body data-theme="dark">
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <div class="brand-logo" aria-hidden="true"></div>
-        <h1>LifeLink</h1>
-      </div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#features">Features</a>
-        <a href="#hospitals">Hospitals</a>
-        <a href="#contact">Contact</a>
-   
-  
-<<<<<<< HEAD
-=======
-  <!-- Ye 4 links tumhare login pages ko connect karenge -->
->>>>>>> 3b96d813543a9f6514cee3afbb16fa4731ad5294
-       <a href="admin-login.html">Admin</a>
-       <a href="donor-login.html">Donor</a>
-       <a href="hospital-login.html">Hospital</a>
-       <a href="patient-login.html">Patient</a>
-      </nav>
-
-  
-     </div>
-  </header>
-
   <section class="hero" id="home">
     <div class="organs" aria-hidden="true">
       <span class="o1">🫀</span>
