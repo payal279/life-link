@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeLink • Connecting Lives</title>
+  <style>
+    /* ====== THEME ====== */
+    :root {
+      --bg: #0f172a; /* dark slate */
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --brand-1: #f4a7c5; /* blush */
+      --brand-2: #c6b6f3; /* lavender */
+      --brand-3: #8fd3f4; /* aqua */
+      --accent: #ff72a7; /* hot pink */
+      --card: rgba(30,41,59,0.8);
+      --shadow: rgba(0,0,0,0.55);
+      --ring: rgba(255, 114, 167, 0.35);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Alternate palettes */
+    body[data-theme="mint"] {
+      --brand-1: #a8edea; --brand-2: #fed6e3; --brand-3: #b8f1d5; --accent:#15c2b8;
+    }
+    body[data-theme="sunset"] {
+      --brand-1: #ff9a9e; --brand-2: #fad0c4; --brand-3: #fbc2eb; --accent:#ff758c;
+    }
+
+    /* ====== RESET ====== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text); background: var(--bg);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ====== HEADER / NAV ====== */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(14px);
+      background: rgba(15,23,42,0.85);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.2rem; display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: .75rem; }
+    .brand-logo {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: radial-gradient(circle at 30% 30%, var(--brand-3), transparent 60%),
+                  radial-gradient(circle at 70% 70%, var(--brand-1), transparent 60%),
+                  radial-gradient(circle at 70% 30%, var(--brand-2), transparent 60%),
+                  linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      box-shadow: 0 10px 18px var(--shadow), inset 0 0 0 1px rgba(255,255,255,.2);
+    }
+    .brand h1 {
+      margin: 0; font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: .5px; font-weight: 800;
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 2px 18px rgba(255, 114, 167, 0.4);
+    }
+
+    nav a { position: relative; display: inline-block; padding: .5rem .75rem; margin-left: .25rem; font-weight: 600; color: #cbd5e1; }
+    nav a::after {
+      content: ""; position: absolute; left: .75rem; right: .75rem; bottom: .3rem; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--brand-1), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+    }
+    nav a:hover::after { transform: scaleX(1); }
+
+    /* ====== HERO ====== */
+    .hero {
+      position: relative; overflow: hidden;
+      background: radial-gradient(1200px 600px at 0% 0%, var(--brand-2) 0%, transparent 60%),
+                  radial-gradient(900px 600px at 100% 20%, var(--brand-1) 0%, transparent 60%),
+                  linear-gradient(180deg, #1e293b 0%, #0f172a 80%);
+      min-height: 72vh; display: grid; place-items: center; text-align: center; padding: 6rem 1.25rem 4rem;
+    }
+    .hero-inner { max-width: 1000px; }
+
+    .kicker { text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; color: var(--muted); }
+    .display {
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.05; margin: .5rem 0 1rem; font-weight: 900;
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 6px 28px rgba(210, 167, 255, 0.45);
+    }
+    .sub { max-width: 760px; margin: 0 auto 1.8rem; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.2rem); }
+
+    .cta {
+      display: inline-block; padding: .9rem 1.2rem; border-radius: 999px; font-weight: 700;
+      background: linear-gradient(90deg, var(--brand-3), var(--accent)); color: white;
+      box-shadow: 0 10px 20px var(--ring), 0 1px 0 rgba(255,255,255,.15) inset;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+    .cta:hover { transform: translateY(-2px) scale(1.02); filter: saturate(1.05); box-shadow: 0 16px 26px var(--ring); }
+
+    /* Floating organ emojis in BG */
+    .organs { position: absolute; inset: 0; pointer-events: none; opacity: .18; }
+    .organs span { position: absolute; font-size: clamp(28px, 3.6vw, 44px); filter: blur(.2px); }
+    .o1{ top: 10%; left: 8%; } .o2{ top: 20%; right: 12%; }
+    .o3{ top: 42%; left: 16%; } .o4{ top: 65%; right: 18%; }
+    .o5{ top: 28%; left: 52%; } .o6{ top: 75%; left: 8%; }
+    .o7{ top: 12%; left: 70%; } .o8{ top: 56%; left: 78%; }
+
+    /* ====== FEATURE GRID ====== */
+    .section { max-width: 1200px; margin: 0 auto; padding: 3.2rem 1.25rem; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.2rem; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 1.25rem 1.2rem;
+      box-shadow: 0 10px 18px var(--shadow); backdrop-filter: blur(10px);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 18px 36px var(--shadow); border-color: rgba(255,114,167,.8); }
+    .card h3 { margin: 0 0 .3rem; letter-spacing: .2px; }
+    .pill { display: inline-block; padding: .35rem .7rem; border-radius: 999px; background: rgba(255,114,167,.2); color: #f9a8d4; font-size: .8rem; font-weight: 700; }
+
+    /* ====== HOSPITALS GRID ====== */
+    .hospitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
+    .hospital { position: relative; overflow: hidden; }
+    .hospital .tag { position: absolute; top: .9rem; left: .9rem; }
+    .hospital h4 { margin: .4rem 0 0; }
+    .hospital .meta { color: var(--muted); font-size: .92rem; }
+    .hospital .banner {
+      height: 140px; border-radius: 16px; margin: .2rem; border: 1px solid var(--border);
+      background: radial-gradient(400px 160px at 10% 20%, var(--brand-3), transparent 60%),
+                  radial-gradient(400px 200px at 90% 80%, var(--brand-1), transparent 60%),
+                  linear-gradient(135deg, #1e293b, #0f172a);
+      position: relative; overflow: hidden;
+    }
+    .hospital .banner::after {
+      content: "🩺"; position: absolute; right: 12px; bottom: 6px; font-size: 64px; opacity: .15;
+    }
+
+    /* ====== FOOTER ====== */
+    footer { text-align: center; padding: 2.4rem 1.2rem; color: var(--muted); }
+
+    .title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); margin: 0 0 1rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.2rem; align-items: center; }
+    .muted { color: var(--muted); }
+    .center { text-align: center; }
+    .spacer { height: 1rem; }
+  </style>
+</head>
+
+<body data-theme="dark">
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true"></div>
+        <h1>LifeLink</h1>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#hospitals">Hospitals</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="organs" aria-hidden="true">
+      <span class="o1">🫀</span>
+      <span class="o2">🫁</span>
+      <span class="o3">🧠</span>
+      <span class="o4">🦴</span>
+      <span class="o5">🧬</span>
+      <span class="o6">🩸</span>
+      <span class="o7">🫁</span>
+      <span class="o8">🫀</span>
+    </div>
+    <div class="hero-inner">
+      <div class="kicker">Organ Donation • Matching • Recovery</div>
+      <h2 class="display">Linking Organ donation and Patients via Hospital</h2>
+      <p class="sub">Register donors, manage patients, and coordinate hospital-wise transplants — all in one</p>
+      <a class="cta" href="#features">Explore Features</a>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="grid-2">
+      <div>
+        <h3 class="title">What is LifeLink?</h3>
+        <p class="muted">LifeLink simplifies the end‑to‑end transplant workflow: donor registration, medical screening, organ availability, patient matching, surgery scheduling, and recovery follow‑ups. Built to be transparent and hospital‑friendly.</p>
+        <div class="spacer"></div>
+        <span class="pill">Privacy‑first</span>
+        <span class="pill">HIPAA‑aware</span>
+        <span class="pill">Audit trail</span>
+      </div>
+      <div class="card">
+        <h3>Quick Highlights</h3>
+        <ul>
+          <li>Donor & patient profiles with medical history</li>
+          <li>Organ inventory & compatibility checks</li>
+          <li>Hospital‑wise dashboards & reports</li>
+          <li>Recovery timelines & alerts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h3 class="title center">Core Features</h3>
+    <div class="features">
+      <article class="card">
+        <h3>Donor Registration</h3>
+        <p class="muted">Elegant forms to register donors with health parameters and consent documents.</p>
+      </article>
+      <article class="card">
+        <h3>Patient Matching</h3>
+        <p class="muted">Rule‑based matching by blood group, HLA, urgency and geographic proximity.</p>
+      </article>
+      <article class="card">
+        <h3>Organ Tracking</h3>
+        <p class="muted">Real‑time status of heart, lungs, liver, kidneys, cornea and more.</p>
+      </article>
+      <article class="card">
+        <h3>Recovery & Reports</h3>
+        <p class="muted">Follow‑up plans, discharge summaries and hospital‑wise analytics.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="hospitals">
+    <h3 class="title center">Partner Hospitals</h3>
+    <div class="hospitals">
+      <div class="card hospital">
+        <span class="pill tag">Delhi</span>
+        <div class="banner"></div>
+        <h4>Apollo Hospital</h4>
+        <p class="meta">Cardio, Neuro, Multi‑organ transplant center</p>
+      </div>
+      <div class="card hospital">
+        <span class="pill tag">Mumbai</span>
+        <div class="banner"></div>
+        <h4>Fortis Hospital</h4>
+        <p class="meta">Renal & Liver transplant excellence</p>
+      </div>
+      <div class="card hospital">
+        <span class="pill tag">Delhi</span>
+        <div class="banner"></div>
+        <h4>AIIMS</h4>
+        <p class="meta">National institute • Advanced care</p>
+      </div>
+      <div class="card hospital">
+        <span class="pill tag">Bengaluru</span>
+        <div class="banner"></div>
+        <h4>Narayana Health</h4>
+        <p class="meta">Pediatric & adult transplant programs</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section center" id="contact">
+    <h3 class="title">Ready to join LifeLink?</h3>
+    <p class="muted">Hospitals and coordinators can get early access. Patients and donors may contact us for guidance.</p>
+    <div class="spacer"></div>
+    <a class="cta" href="#">Contact Us</a>
+  </section>
+
+  <footer>
+    <p>© 2025 LifeLink. Built with care.</p>
+  </footer>
+</body>
+</html>
