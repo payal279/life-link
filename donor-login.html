@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeLink • Login</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --brand-1: #f4a7c5;
+      --brand-2: #c6b6f3;
+      --brand-3: #8fd3f4;
+      --accent: #ff72a7;
+      --card: rgba(30,41,59,0.85);
+      --shadow: rgba(0,0,0,0.55);
+      --ring: rgba(255, 114, 167, 0.35);
+      --border: rgba(255, 255, 255, 0.12);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1000px 600px at 0% 0%, var(--brand-2) 0%, transparent 70%),
+                  radial-gradient(1000px 600px at 100% 0%, var(--brand-1) 0%, transparent 70%),
+                  #0f172a;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 10px 20px var(--shadow);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-card h2 {
+      margin: 0 0 1rem;
+      font-size: 1.8rem;
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: .9rem;
+      margin-bottom: .3rem;
+      color: var(--muted);
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border .2s, box-shadow .2s;
+    }
+
+    .input-group input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: .5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--brand-3), var(--accent));
+      color: white;
+      box-shadow: 0 6px 16px var(--ring);
+      transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: saturate(1.08);
+      box-shadow: 0 12px 24px var(--ring);
+    }
+
+    .extra-links {
+      margin-top: 1rem;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .extra-links a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <!-- Change this heading for each type -->
+    <h2>Donor Login</h2>  
+
+    <form>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="extra-links">
+      <p><a href="#">Forgot Password?</a></p>
+    </div>
+  </div>
+</body>
+</html>
