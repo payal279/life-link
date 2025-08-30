@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LifeLink • Role Login</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --brand-1: #f4a7c5;
+      --brand-2: #c6b6f3;
+      --brand-3: #8fd3f4;
+      --accent: #ff72a7;
+      --card: rgba(30,41,59,0.9);
+      --ring: rgba(255, 114, 167, 0.35);
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      width: 90%;
+      max-width: 1000px;
+    }
+    .role-card {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 2rem 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .role-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 18px 30px var(--ring);
+    }
+    .role-card h3 {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .options {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    .role-card:hover .options {
+      opacity: 1;
+      max-height: 200px;
+      margin-top: 1rem;
+    }
+    .options a {
+      display: block;
+      margin: 0.4rem auto;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--brand-3), var(--accent));
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 6px 14px var(--ring);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 70%;
+    }
+    .options a:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px var(--ring);
+    }
+  </style>
+</head>
+<body>
+  <h2>Choose Your Role</h2>
+  <div class="roles">
+    <div class="role-card">
+      <h3>Donor</h3>
+      <div class="options">
+        <a href="donor-login.html">Login</a>
+        <a href="donor-register.html">Register</a>
+      </div>
+    </div>
+    <div class="role-card">
+      <h3>Patient</h3>
+      <div class="options">
+        <a href="patient-login.html">Login</a>
+        <a href="patient-register.html">Register</a>
+      </div>
+    </div>
+    <div class="role-card">
+      <h3>Hospital</h3>
+      <div class="options">
+        <a href="hospital-login.html">Login</a>
+        <a href="hospital-register.html">Register</a>
+      </div>
+    </div>
+    <div class="role-card">
+      <h3>Admin</h3>
+      <div class="options">
+        <a href="admin-login.html">Login</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
