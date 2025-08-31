@@ -173,7 +173,13 @@
         <option>Kidneys</option>
         <option>Cornea</option>
         <option>Pancreas</option>
-      </select>
+        <option value="Other">Other</option> <!-- ✅ Added -->
+</select>
+    
+<!-- Hidden textbox for "Other" option -->
+<input type="text" id="otherOrganInput" name="otherOrgan" 
+       placeholder="Please specify organ" 
+       style="display:none; margin-top:5px;">
     </div>
     <div>
       <label for="organ-requirement">Organ Requirement Details</label>
@@ -206,8 +212,24 @@
     </div>
 
 </div>
-
+    
 
   </form>
+  <script>
+  const organSelect = document.getElementById("required-organ");
+  const otherOrganInput = document.getElementById("otherOrganInput");
+
+  organSelect.addEventListener("change", function() {
+    if (this.value === "Other") {
+      otherOrganInput.style.display = "block";
+      otherOrganInput.required = true;
+    } else {
+      otherOrganInput.style.display = "none";
+      otherOrganInput.required = false;
+      otherOrganInput.value = "";
+    }
+  });
+</script>
+
 </body>
 </html>
