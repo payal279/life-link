@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>Hospital Registration Form</h2>
-  <form action="submit" method="post" enctype="multipart/form-data">
+  <form id="hospitalForm" action="submit" method="post" enctype="multipart/form-data">
     <!-- Basic Info -->
     <div>
       <label for="hname">Hospital Name</label>
@@ -127,5 +127,47 @@
 
     <button type="submit">Register Hospital</button>
   </form>
+
+  <script>
+    const hospitalForm = document.getElementById("hospitalForm");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
+
+    hospitalForm.addEventListener("submit", function(e) {
+      let errors = [];
+
+      // Contact number validations
+      const contact = document.getElementById("contact").value;
+      if (!/^\d{10}$/.test(contact)) {
+        errors.push("Hospital contact must be 10 digits.");
+      }
+      const coordContact = document.getElementById("coord_contact").value;
+      if (!/^\d{10}$/.test(coordContact)) {
+        errors.push("Coordinator contact must be 10 digits.");
+      }
+
+      // Beds and ICU
+      const beds = parseInt(document.getElementById("beds").value);
+      const icu = parseInt(document.getElementById("icu").value);
+      if (isNaN(beds) || beds < 0) errors.push("Enter valid number of beds.");
+      if (isNaN(icu) || icu < 0) errors.push("Enter valid number of ICU units.");
+
+      // At least one organ selected
+      const organCheckboxes = document.querySelectorAll('input[name="organs[]"]:checked');
+      if (organCheckboxes.length === 0) {
+        errors.push("Select at least one organ facility.");
+      }
+
+      // Password match
+      if (password.value !== confirmPassword.value) {
+        errors.push("Passwords do not match.");
+      }
+
+      if (errors.length > 0) {
+        e.preventDefault();
+        alert(errors.join("\n"));
+      }
+    });
+  </script>
 </body>
 </html>

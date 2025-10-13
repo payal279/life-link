@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>Donor Registration Form</h2>
-  <form action="submit" method="post">
+  <form id="donorForm" action="submit" method="post">
     <!-- Personal Info -->
     <div>
       <label for="name">Full Name</label>
@@ -63,16 +63,16 @@
         <label><input type="checkbox" name="organs" value="Cornea" /> Cornea</label>
         <label><input type="checkbox" name="organs" value="Pancreas" /> Pancreas</label>
         <label>
-  <input type="checkbox" id="otherCheckbox" name="organs" value="Other" />
-  Other
-</label>
+          <input type="checkbox" id="otherCheckbox" name="organs" value="Other" />
+          Other
+        </label>
 
-<!-- Hidden textbox for "Other" option -->
-<input type="text" id="otherOrganInput" name="otherOrgan" 
-       placeholder="Please specify" style="display:none; margin-top:5px;">
-
+        <!-- Hidden textbox for "Other" option -->
+        <input type="text" id="otherOrganInput" name="otherOrgan" 
+               placeholder="Please specify" style="display:none; margin-top:5px;">
       </div>
     </div>
+
     <!-- Password & Captcha Box -->
     <div class="password-box">
       <h3>Platform Login Credentials</h3>
@@ -98,20 +98,58 @@
     <!-- Submit -->
     <button type="submit">Register as Donor</button>
   </form>
-  <script>
-  const otherCheckbox = document.getElementById("otherCheckbox");
-  const otherOrganInput = document.getElementById("otherOrganInput");
 
-  otherCheckbox.addEventListener("change", function() {
-    if (this.checked) {
-      otherOrganInput.style.display = "block";
-      otherOrganInput.required = true; // make it required when checked
-    } else {
-      otherOrganInput.style.display = "none";
-      otherOrganInput.required = false;
-      otherOrganInput.value = ""; // clear when unchecked
-    }
-  });
-</script>
+  <script>
+    const donorForm = document.getElementById("donorForm");
+    const otherCheckbox = document.getElementById("otherCheckbox");
+    const otherOrganInput = document.getElementById("otherOrganInput");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
+
+    // Show/hide other organ input
+    otherCheckbox.addEventListener("change", function() {
+      if (this.checked) {
+        otherOrganInput.style.display = "block";
+        otherOrganInput.required = true;
+      } else {
+        otherOrganInput.style.display = "none";
+        otherOrganInput.required = false;
+        otherOrganInput.value = "";
+      }
+    });
+
+    // Form validation
+    donorForm.addEventListener("submit", function(e) {
+      let errors = [];
+
+      // Age check
+      const age = parseInt(document.getElementById("age").value);
+      if (isNaN(age) || age < 18) {
+        errors.push("Age must be 18 or older.");
+      }
+
+      // Contact number check
+      const contact = document.getElementById("contact").value;
+      if (!/^\d{10}$/.test(contact)) {
+        errors.push("Contact number must be 10 digits.");
+      }
+
+      // At least one organ selected
+      const organsChecked = document.querySelectorAll('input[name="organs"]:checked');
+      if (organsChecked.length === 0) {
+        errors.push("Select at least one organ to donate.");
+      }
+
+      // Password match
+      if (password.value !== confirmPassword.value) {
+        errors.push("Passwords do not match.");
+      }
+
+      if (errors.length > 0) {
+        e.preventDefault();
+        alert(errors.join("\n"));
+      }
+    });
+  </script>
 </body>
 </html>

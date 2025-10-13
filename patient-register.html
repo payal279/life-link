@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>Patient Registration Form</h2>
-  <form action="submit" method="post">
+  <form id="patientForm" action="submit" method="post">
     <!-- Personal Info -->
     <div>
       <label for="name">Full Name</label>
@@ -65,13 +65,13 @@
         <option>Kidneys</option>
         <option>Cornea</option>
         <option>Pancreas</option>
-        <option value="Other">Other</option> <!-- ✅ Added -->
-</select>
-    
-<!-- Hidden textbox for "Other" option -->
-<input type="text" id="otherOrganInput" name="otherOrgan" 
-       placeholder="Please specify organ" 
-       style="display:none; margin-top:5px;">
+        <option value="Other">Other</option>
+      </select>
+
+      <!-- Hidden textbox for "Other" option -->
+      <input type="text" id="otherOrganInput" name="otherOrgan" 
+             placeholder="Please specify organ" 
+             style="display:none; margin-top:5px;">
     </div>
     <div>
       <label for="organ-requirement">Organ Requirement Details</label>
@@ -81,6 +81,7 @@
       <label for="hospital">Preferred Hospital</label>
       <input type="text" id="hospital" name="hospital" placeholder="Hospital Name" required />
     </div>
+
     <!-- Password & Captcha Box -->
     <div class="password-box">
       <h3>Platform Login Credentials</h3>
@@ -103,25 +104,56 @@
       </div>
     </div>
 
-</div>
-    
-
+    <div>
+      <button type="submit">Register</button>
+    </div>
   </form>
+
   <script>
-  const organSelect = document.getElementById("required-organ");
-  const otherOrganInput = document.getElementById("otherOrganInput");
+    const patientForm = document.getElementById("patientForm");
+    const organSelect = document.getElementById("required-organ");
+    const otherOrganInput = document.getElementById("otherOrganInput");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm-password");
 
-  organSelect.addEventListener("change", function() {
-    if (this.value === "Other") {
-      otherOrganInput.style.display = "block";
-      otherOrganInput.required = true;
-    } else {
-      otherOrganInput.style.display = "none";
-      otherOrganInput.required = false;
-      otherOrganInput.value = "";
-    }
-  });
-</script>
+    // Show/hide "Other Organ" input
+    organSelect.addEventListener("change", function() {
+      if (this.value === "Other") {
+        otherOrganInput.style.display = "block";
+        otherOrganInput.required = true;
+      } else {
+        otherOrganInput.style.display = "none";
+        otherOrganInput.required = false;
+        otherOrganInput.value = "";
+      }
+    });
 
+    // Form validation on submit
+    patientForm.addEventListener("submit", function(e) {
+      let errors = [];
+
+      // Age validation
+      const age = parseInt(document.getElementById("age").value);
+      if (isNaN(age) || age <= 0) {
+        errors.push("Please enter a valid age.");
+      }
+
+      // Password match validation
+      if (password.value !== confirmPassword.value) {
+        errors.push("Passwords do not match.");
+      }
+
+      // Contact pattern check
+      const contact = document.getElementById("contact").value;
+      if (!/^\d{10}$/.test(contact)) {
+        errors.push("Contact number must be 10 digits.");
+      }
+
+      if (errors.length > 0) {
+        e.preventDefault(); // Stop form submission
+        alert(errors.join("\n"));
+      }
+    });
+  </script>
 </body>
 </html>
