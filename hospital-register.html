@@ -4,118 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LifeLink • Hospital Registration</title>
-  <style>
-    :root {
-      --bg: #0f172a;
-      --text: #f1f5f9;
-      --brand-1: #f4a7c5;
-      --brand-2: #c6b6f3;
-      --brand-3: #8fd3f4;
-      --accent: #ff72a7;
-      --card: rgba(30,41,59,0.9);
-    }
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      padding: 2rem 1rem;
-    }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    form {
-      background: var(--card);
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.6);
-      width: 100%;
-      max-width: 700px;
-      display: grid;
-      gap: 1rem;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-      display: block;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.7rem 1rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.05);
-      color: var(--text);
-      font-size: 1rem;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-    }
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-weight: 500;
-    }
-      .checkbox-group label {
-    color: #ffffff;
-    font-weight: 600;
-  }
-
-  .checkbox-group input[type="checkbox"] {
-    accent-color: var(--accent);
-  }
-  select option {
-    background-color: var(--card);
-    color: #ffffff;
-  }
-
-    .password-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 1rem;
-      border-radius: 12px;
-      display: grid;
-      gap: 1rem;
-    }
-    .captcha-box {
-      display: grid;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .captcha-box strong {
-      font-family: monospace;
-      background: rgba(255,255,255,0.2);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      letter-spacing: 2px;
-    }
-    button {
-      padding: 0.9rem 1.2rem;
-      border-radius: 999px;
-      border: none;
-      font-weight: 700;
-      font-size: 1rem;
-      background: linear-gradient(90deg, var(--brand-3), var(--accent));
-      color: white;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>Hospital Registration Form</h2>
@@ -151,7 +40,7 @@
       <input type="email" id="email" name="email" required />
     </div>
 
-    <!-- Accreditation & License -->
+    <!--License -->
     <div>
       <label for="license">Organ Transplant License Number</label>
       <input type="text" id="license" name="license_number" required />
