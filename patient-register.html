@@ -99,7 +99,7 @@
       </div>
       <div class="captcha-box">
         <label>Enter Captcha: <strong>AB12CD</strong></label>
-        <input type="text" name="captcha" placeholder="Type the text above" required>
+        <input type="text" id="captcha" name="captcha" placeholder="Type the text above" required>
         <small>Captcha is static for visual purposes</small>
       </div>
     </div>
@@ -115,6 +115,8 @@
     const otherOrganInput = document.getElementById("otherOrganInput");
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
+    const captcha = document.getElementById("captcha");
+    let formSubmitted = false; // to track submission state
 
     // Show/hide "Other Organ" input
     organSelect.addEventListener("change", function() {
@@ -130,6 +132,7 @@
 
     // Form validation on submit
     patientForm.addEventListener("submit", function(e) {
+      e.preventDefault(); // prevent default for custom validation
       let errors = [];
 
       // Age validation
@@ -149,12 +152,37 @@
         errors.push("Contact number must be 10 digits.");
       }
 
+      // Captcha check (static)
+      if (captcha.value.trim() !== "AB12CD") {
+        errors.push("Invalid captcha entered.");
+      }
+
+      // If errors exist
       if (errors.length > 0) {
-        e.preventDefault(); // Stop form submission
-        alert(errors.join("\n"));
+        alert("⚠ Please fix the following errors:\n\n" + errors.join("\n"));
+        formSubmitted = false;
+        return;
+      }
+
+      // Confirmation alert before submitting
+      const confirmSubmit = confirm("Do you want to submit the registration form?");
+      if (confirmSubmit) {
+        alert("✅ Your form has been submitted successfully!");
+        formSubmitted = true;
+        patientForm.reset(); // clear form
+      } else {
+        alert("❌ Form submission canceled.");
+        formSubmitted = false;
+      }
+    });
+
+    // Alert when trying to leave without submitting
+    window.addEventListener("beforeunload", function (e) {
+      if (!formSubmitted) {
+        e.preventDefault();
+        e.returnValue = "Are you sure you want to go back? Your response is not submitted.";
       }
     });
   </script>
-  <script src="main.js"></script>
 </body>
 </html>

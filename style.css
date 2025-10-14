@@ -319,192 +319,66 @@ nav a.active-link {
   font-weight: bold;
   text-decoration: underline;
 }
-/* Add this code to your existing style.css file */
-
-/* --- 1. THEME COLORS (CSS Variables) --- */
+/* --- 1. MASTER THEME COLOR PALETTES (CSS Variables) --- */
 :root {
-    /* Light Mode Colors (Default) */
+    /* Yeh aapka DEFAULT (Light Mode) hai */
     --background-color: #ffffff;
-    --text-color: #333333;
-    --card-color: #f4f4f4;
-    --primary-color: #ff4757;
-}
-
-body.dark-mode {
-    /* Dark Mode Colors */
-    --background-color: #121212;
-    --text-color: #e0e0e0;
-    --card-color: #1e1e1e;
-    --primary-color: #ff6b81;
-}
-
-/* Apply the theme colors to your elements */
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
-}
-
-/* Example: update your existing nav styles */
-nav {
-    background-color: var(--card-color);
-}
-
-
-/* --- 2. ALERT MESSAGE STYLING --- */
-.alert-message {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 15px 25px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.alert-message.success {
-    background-color: #2ed573; /* Green */
-}
-
-.alert-message.error {
-    background-color: #ff4757; /* Red */
-}
-
-
-/* --- 3. ANIMATION STYLING --- */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-/* --- 1. THEME COLORS (CSS Variables) --- */
-:root {
-    /* Light Mode Colors (Default) */
-    --background-color: #0F0C29; /* Your dark background */
-    --text-color: #ffffff;
-    --card-color: #1d193d; /* A slightly lighter purple/dark blue */
-    --primary-color: #ff6b81; /* Your pink/rose color */
-    --gradient-start: #DA4453;
-    --gradient-end: #89216B;
-}
-
-body.dark-mode {
-    /* Dark Mode Colors */
-    --background-color: #121212;
-    --text-color: #e0e0e0;
-    --card-color: #1e1e1e;
-    --primary-color: #ff8a9a;
-}
-
-
-/* --- 1. THEME COLOR PALETTES (CSS Variables) --- */
-:root {
-    /* This is your DEFAULT (Light Mode) Palette */
-    --background-color: #ffffff;
-    --text-color: #212529;
-    --card-color: #f8f9fa;
-    --primary-color: #5865f2; /* A nice blue for light mode */
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --text-color: #212529; /* Dark text for light background */
+    --card-color: #f8f9fa;   /* Header/Footer ka halka grey color */
+    --primary-color: #5865f2; /* Button ka blue color */
     --gradient-text-1: #6a11cb;
     --gradient-text-2: #2575fc;
 }
 
 body.dark-mode {
-    /* This is your DARK MODE Palette (from your screenshot) */
+    /* Yeh aapka DARK MODE hai */
     --background-color: #0F0C29;
-    --text-color: #e0e0e0;
-    --card-color: #1d193d;
-    --primary-color: #ff6b81; /* Pink/Rose for dark mode */
-    --shadow-color: rgba(0, 0, 0, 0.4);
+    --text-color: #e0e0e0; /* Light text for dark background */
+    --card-color: #1d193d;   /* Header/Footer ka dark purple color */
+    --primary-color: #ff6b81; /* Button ka pink color */
     --gradient-text-1: #ff7e5f;
     --gradient-text-2: #feb47b;
 }
 
-/* --- 2. APPLY THE THEME TO YOUR ENTIRE SITE --- */
+/* --- 2. AB IN VARIABLES KO WEBSITE PAR LAGU KAREIN --- */
 
-/* Apply base styles to the body */
+/* Poori website par effect daalne ke liye */
 body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: sans-serif;
-    /* Add a smooth transition effect for color changes */
+    /* Color change ko smooth banane ke liye */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Style your header/navigation bar */
-header {
+/* Header/Nav aur Footer par effect daalne ke liye */
+header, footer {
     background-color: var(--card-color);
-    box-shadow: 0 2px 4px var(--shadow-color);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     transition: background-color 0.3s ease;
 }
 
-/* Style your main heading text */
-.hero-text h1 {
+/* Front Page ke sabhi Text par effect daalne ke liye */
+.kicker, .sub, footer p {
     color: var(--text-color);
-    /* Your gradient style using variables */
+}
+
+/* Main Heading ka Gradient */
+h2.display {
     background: linear-gradient(90deg, var(--gradient-text-1), var(--gradient-text-2));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
+/* Navbar ke Background aur Text ka Color */
 
-/* Style your regular paragraphs and links */
-p, a {
-    color: var(--text-color);
+header, nav {
+  background-color: var(--card-color); /* Card color ka variable use karega */
+  
+  /* Color change ko smooth banane ke liye */
+  transition: background-color 0.3s ease;
 }
 
-/* Style your buttons */
-.explore-button {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+nav a {
+  color: var(--text-color); /* Text color ka variable use karega */
 }
 
-/* --- 3. THEME TOGGLE BUTTON STYLES --- */
-.theme-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-btn .icon {
-    width: 24px;
-    height: 24px;
-    color: var(--text-color);
-}
-
-/* Hide the moon icon by default (in light mode) */
-.theme-btn .icon-moon {
-    display: none;
-}
-
-/* In dark mode, hide the sun and show the moon */
-body.dark-mode .theme-btn .icon-sun {
-    display: none;
-}
-
-body.dark-mode .theme-btn .icon-moon {
-    display: block;
-}

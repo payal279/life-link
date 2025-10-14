@@ -120,7 +120,7 @@
       </div>
       <div class="captcha-box">
         <label>Enter Captcha: <strong>AB12CD</strong></label>
-        <input type="text" name="captcha" placeholder="Type the text above" required>
+        <input type="text" id="captcha" name="captcha" placeholder="Type the text above" required>
         <small>Captcha is static for visual purposes</small>
       </div>
     </div>
@@ -132,15 +132,20 @@
     const hospitalForm = document.getElementById("hospitalForm");
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
+    const captchaInput = document.getElementById("captcha");
+    let formSubmitted = false; // Track submission state
 
     hospitalForm.addEventListener("submit", function(e) {
+      e.preventDefault(); // Stop form to validate first
       let errors = [];
 
-      // Contact number validations
+      // Hospital Contact number
       const contact = document.getElementById("contact").value;
       if (!/^\d{10}$/.test(contact)) {
         errors.push("Hospital contact must be 10 digits.");
       }
+
+      // Coordinator contact number
       const coordContact = document.getElementById("coord_contact").value;
       if (!/^\d{10}$/.test(coordContact)) {
         errors.push("Coordinator contact must be 10 digits.");
@@ -152,7 +157,7 @@
       if (isNaN(beds) || beds < 0) errors.push("Enter valid number of beds.");
       if (isNaN(icu) || icu < 0) errors.push("Enter valid number of ICU units.");
 
-      // At least one organ selected
+      // Organ selection
       const organCheckboxes = document.querySelectorAll('input[name="organs[]"]:checked');
       if (organCheckboxes.length === 0) {
         errors.push("Select at least one organ facility.");
@@ -163,12 +168,30 @@
         errors.push("Passwords do not match.");
       }
 
+      // Captcha check
+      const captchaValue = captchaInput.value.trim();
+      if (captchaValue !== "AB12CD") {
+        errors.push("Incorrect captcha entered.");
+      }
+
+      // Show alerts
       if (errors.length > 0) {
+        alert("⚠ Please fix the following errors:\n\n" + errors.join("\n"));
+        formSubmitted = false;
+      } else {
+        alert("✅ Your form has been submitted successfully!");
+        formSubmitted = true;
+        hospitalForm.reset(); // clear form
+      }
+    });
+
+    // Warn user if they try to leave before submission
+    window.addEventListener("beforeunload", function (e) {
+      if (!formSubmitted) {
         e.preventDefault();
-        alert(errors.join("\n"));
+        e.returnValue = "Are you sure you want to go back? Your response is not submitted.";
       }
     });
   </script>
-   <script src="main.js"></script>
 </body>
 </html>

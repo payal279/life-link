@@ -106,7 +106,7 @@
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
 
-    // Show/hide other organ input
+    // Show/hide "Other" organ input
     otherCheckbox.addEventListener("change", function() {
       if (this.checked) {
         otherOrganInput.style.display = "block";
@@ -118,17 +118,37 @@
       }
     });
 
+    // Track if form is submitted
+    let formSubmitted = false;
+
+    // Warn user if leaving page before submitting
+    window.addEventListener("beforeunload", function (e) {
+      if (!formSubmitted) {
+        e.preventDefault();
+        e.returnValue = "Are you sure you want to leave? Your form is not submitted yet.";
+      }
+    });
+
     // Form validation
     donorForm.addEventListener("submit", function(e) {
       let errors = [];
 
-      // Age check
+      // Check required fields
+      const requiredFields = donorForm.querySelectorAll("[required]");
+      for (let field of requiredFields) {
+        if (!field.value.trim()) {
+          errors.push("Please fill out all required fields before submitting!");
+          break;
+        }
+      }
+
+      // Age validation
       const age = parseInt(document.getElementById("age").value);
       if (isNaN(age) || age < 18) {
         errors.push("Age must be 18 or older.");
       }
 
-      // Contact number check
+      // Contact validation
       const contact = document.getElementById("contact").value;
       if (!/^\d{10}$/.test(contact)) {
         errors.push("Contact number must be 10 digits.");
@@ -140,17 +160,20 @@
         errors.push("Select at least one organ to donate.");
       }
 
-      // Password match
+      // Password match validation
       if (password.value !== confirmPassword.value) {
         errors.push("Passwords do not match.");
       }
 
+      // Display errors or success message
       if (errors.length > 0) {
         e.preventDefault();
         alert(errors.join("\n"));
+      } else {
+        formSubmitted = true;
+        alert("Your form has been submitted successfully!");
       }
     });
   </script>
-  <script src="main.js"></script>
 </body>
 </html>
