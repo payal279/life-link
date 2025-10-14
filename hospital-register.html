@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LifeLink • Hospital Registration</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    input.valid { border: 2px solid green; }
+    input.invalid { border: 2px solid red; }
+    small { color: red; }
+  </style>
 </head>
 <body>
   <h2>Hospital Registration Form</h2>
   <form id="hospitalForm" action="submit" method="post" enctype="multipart/form-data">
-    <!-- Basic Info -->
     <div>
       <label for="hname">Hospital Name</label>
       <input type="text" id="hname" name="hospital_name" required />
@@ -34,13 +38,12 @@
     <div>
       <label for="contact">Contact Number</label>
       <input type="tel" id="contact" name="contact" pattern="[0-9]{10}" required placeholder="10-digit number"/>
+      <small id="contactError"></small>
     </div>
     <div>
       <label for="email">Hospital Email</label>
       <input type="email" id="email" name="email" required />
     </div>
-
-    <!--License -->
     <div>
       <label for="license">Organ Transplant License Number</label>
       <input type="text" id="license" name="license_number" required />
@@ -49,8 +52,6 @@
       <label for="license-doc">Upload License Document</label>
       <input type="file" id="license-doc" name="license_doc" accept=".pdf,.jpg,.png" required />
     </div>
-
-    <!-- Facilities -->
     <div>
       <label>Organ Facilities Available</label>
       <div class="checkbox-group">
@@ -61,14 +62,17 @@
         <label><input type="checkbox" name="organs[]" value="Cornea">Cornea</label>
         <label><input type="checkbox" name="organs[]" value="Pancreas">Pancreas</label>
       </div>
+      <small id="organsError"></small>
     </div>
     <div>
       <label for="beds">Number of Beds</label>
       <input type="number" id="beds" name="beds" min="0" required />
+      <small id="bedsError"></small>
     </div>
     <div>
       <label for="icu">Number of ICU Units</label>
       <input type="number" id="icu" name="icu" min="0" required />
+      <small id="icuError"></small>
     </div>
     <div>
       <label>Blood Bank Available?</label>
@@ -78,8 +82,6 @@
         <option>No</option>
       </select>
     </div>
-
-    <!-- Coordinator / Admin -->
     <div>
       <label for="coord_name">Coordinator / Admin Name</label>
       <input type="text" id="coord_name" name="coordinator_name" required />
@@ -87,13 +89,12 @@
     <div>
       <label for="coord_contact">Coordinator Contact Number</label>
       <input type="tel" id="coord_contact" name="coordinator_contact" pattern="[0-9]{10}" required />
+      <small id="coordContactError"></small>
     </div>
     <div>
       <label for="coord_email">Coordinator Email</label>
       <input type="email" id="coord_email" name="coordinator_email" required />
     </div>
-
-    <!-- Compliance -->
     <div>
       <label>Follow NOTTO / SOTTO Guidelines?</label>
       <select name="compliance" required>
@@ -103,7 +104,6 @@
       </select>
     </div>
 
-    <!-- Password & Captcha Box -->
     <div class="password-box">
       <h3>Platform Login Credentials</h3>
       <div>
@@ -118,10 +118,12 @@
         <label for="confirm-password">Retype Password</label>
         <input type="password" id="confirm-password" name="confirm_password" required />
       </div>
-      <div class="captcha-box">
-        <label>Enter Captcha: <strong>AB12CD</strong></label>
-        <input type="text" id="captcha" name="captcha" placeholder="Type the text above" required>
-        <small>Captcha is static for visual purposes</small>
+
+      <div>
+        <label>Captcha: <span id="captchaCode"></span></label>
+        <input type="text" id="captchaInput" placeholder="Type the code" required>
+        <small id="captchaError"></small>
+        <button type="button" id="refreshCaptcha">Refresh Captcha</button>
       </div>
     </div>
 
@@ -132,64 +134,119 @@
     const hospitalForm = document.getElementById("hospitalForm");
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
-    const captchaInput = document.getElementById("captcha");
-    let formSubmitted = false; // Track submission state
+    const contact = document.getElementById("contact");
+    const coordContact = document.getElementById("coord_contact");
+    const beds = document.getElementById("beds");
+    const icu = document.getElementById("icu");
+    const organsCheckboxes = document.querySelectorAll('input[name="organs[]"]');
 
-    hospitalForm.addEventListener("submit", function(e) {
-      e.preventDefault(); // Stop form to validate first
-      let errors = [];
+    const captchaCode = document.getElementById("captchaCode");
+    const captchaInput = document.getElementById("captchaInput");
+    const captchaError = document.getElementById("captchaError");
+    const refreshCaptcha = document.getElementById("refreshCaptcha");
 
-      // Hospital Contact number
-      const contact = document.getElementById("contact").value;
-      if (!/^\d{10}$/.test(contact)) {
-        errors.push("Hospital contact must be 10 digits.");
-      }
+    const errors = {};
 
-      // Coordinator contact number
-      const coordContact = document.getElementById("coord_contact").value;
-      if (!/^\d{10}$/.test(coordContact)) {
-        errors.push("Coordinator contact must be 10 digits.");
-      }
+    function generateCaptcha(length = 6) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let captcha = "";
+      for(let i=0; i<length; i++) captcha += chars.charAt(Math.floor(Math.random()*chars.length));
+      return captcha;
+    }
 
-      // Beds and ICU
-      const beds = parseInt(document.getElementById("beds").value);
-      const icu = parseInt(document.getElementById("icu").value);
-      if (isNaN(beds) || beds < 0) errors.push("Enter valid number of beds.");
-      if (isNaN(icu) || icu < 0) errors.push("Enter valid number of ICU units.");
+    let currentCaptcha = generateCaptcha();
+    captchaCode.textContent = currentCaptcha;
 
-      // Organ selection
-      const organCheckboxes = document.querySelectorAll('input[name="organs[]"]:checked');
-      if (organCheckboxes.length === 0) {
-        errors.push("Select at least one organ facility.");
-      }
+    refreshCaptcha.addEventListener("click", () => {
+      currentCaptcha = generateCaptcha();
+      captchaCode.textContent = currentCaptcha;
+      captchaInput.value = "";
+      captchaError.textContent = "";
+    });
 
-      // Password match
-      if (password.value !== confirmPassword.value) {
-        errors.push("Passwords do not match.");
-      }
-
-      // Captcha check
-      const captchaValue = captchaInput.value.trim();
-      if (captchaValue !== "AB12CD") {
-        errors.push("Incorrect captcha entered.");
-      }
-
-      // Show alerts
-      if (errors.length > 0) {
-        alert("⚠ Please fix the following errors:\n\n" + errors.join("\n"));
-        formSubmitted = false;
+    function validateContact(input, errorId){
+      const value = input.value;
+      const errorElem = document.getElementById(errorId);
+      if(/^\d{10}$/.test(value)){
+        input.classList.add("valid");
+        input.classList.remove("invalid");
+        errorElem.textContent = "";
+        return true;
       } else {
-        alert("✅ Your form has been submitted successfully!");
-        formSubmitted = true;
-        hospitalForm.reset(); // clear form
+        input.classList.add("invalid");
+        input.classList.remove("valid");
+        errorElem.textContent = "Must be 10 digits";
+        return false;
+      }
+    }
+
+    function validateNumber(input, errorId){
+      const value = parseInt(input.value);
+      const errorElem = document.getElementById(errorId);
+      if(!isNaN(value) && value>=0){
+        input.classList.add("valid");
+        input.classList.remove("invalid");
+        errorElem.textContent = "";
+        return true;
+      } else {
+        input.classList.add("invalid");
+        input.classList.remove("valid");
+        errorElem.textContent = "Enter valid number";
+        return false;
+      }
+    }
+
+    contact.addEventListener("input", ()=>validateContact(contact, "contactError"));
+    coordContact.addEventListener("input", ()=>validateContact(coordContact, "coordContactError"));
+    beds.addEventListener("input", ()=>validateNumber(beds, "bedsError"));
+    icu.addEventListener("input", ()=>validateNumber(icu, "icuError"));
+
+    captchaInput.addEventListener("input", ()=>{
+      if(captchaInput.value.toUpperCase() === currentCaptcha){
+        captchaInput.classList.add("valid");
+        captchaInput.classList.remove("invalid");
+        captchaError.textContent = "";
+      } else {
+        captchaInput.classList.add("invalid");
+        captchaInput.classList.remove("valid");
+        captchaError.textContent = "Captcha does not match";
       }
     });
 
-    // Warn user if they try to leave before submission
-    window.addEventListener("beforeunload", function (e) {
-      if (!formSubmitted) {
-        e.preventDefault();
-        e.returnValue = "Are you sure you want to go back? Your response is not submitted.";
+    hospitalForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      let formErrors = [];
+
+      if(!validateContact(contact, "contactError")) formErrors.push("Hospital contact invalid");
+      if(!validateContact(coordContact, "coordContactError")) formErrors.push("Coordinator contact invalid");
+      if(!validateNumber(beds, "bedsError")) formErrors.push("Beds invalid");
+      if(!validateNumber(icu, "icuError")) formErrors.push("ICU units invalid");
+
+      let organsChecked = Array.from(organsCheckboxes).some(c => c.checked);
+      if(!organsChecked){
+        document.getElementById("organsError").textContent = "Select at least one organ facility";
+        formErrors.push("Organ facilities not selected");
+      } else document.getElementById("organsError").textContent = "";
+
+      if(password.value !== confirmPassword.value){
+        formErrors.push("Passwords do not match");
+      }
+
+      if(captchaInput.value.toUpperCase() !== currentCaptcha){
+        formErrors.push("Captcha does not match");
+      }
+
+      if(formErrors.length>0){
+        alert("⚠️ Fix errors:\n"+formErrors.join("\n"));
+      } else {
+        if(confirm("Do you want to submit the hospital registration?")){
+          alert("✅ Hospital registration successful!");
+          hospitalForm.reset();
+          currentCaptcha = generateCaptcha();
+          captchaCode.textContent = currentCaptcha;
+        } else {
+          alert("❌ Form submission canceled.");
+        }
       }
     });
   </script>
