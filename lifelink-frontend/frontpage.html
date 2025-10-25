@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LifeLink • Connecting Lives</title>
+    <style>
+        /* --- 1. CONSOLIDATED THEME VARIABLES --- */
+        :root {
+            /* Default is DARK MODE */
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --brand-1: #f4a7c5; 
+            --brand-2: #c6b6f3; 
+            --brand-3: #8fd3f4;
+            --accent: #ff72a7;
+            --card: rgba(15, 23, 42, 0.85); /* Dark card for header */
+            --shadow: rgba(0, 0, 0, 0.55);
+            --ring: rgba(255, 114, 167, 0.35);5
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode {
+            /* Light Mode Overrides */
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --muted: #475569;
+            --card: rgba(255, 255, 255, 0.85); /* Light card for header */
+            --shadow: rgba(0, 0, 0, 0.1);
+            --ring: rgba(59, 130, 246, 0.35);
+            --border: rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 2. GENERAL STYLES --- */
+        /* RESET */
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
+        body {
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* HEADER / NAV */
+        header {
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: saturate(180%) blur(14px);
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s ease;
+        }
+        .nav-container { /* Renamed from .nav to avoid conflict with <nav> tag */
+            max-width: 1200px; margin: 0 auto; padding: 0.9rem 1.2rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .brand { display: flex; align-items: center; gap: .75rem; }
+        .brand-logo {
+            width: 44px; height: 44px; border-radius: 14px;
+            background: radial-gradient(circle at 30% 30%, var(--brand-3), transparent 60%),
+                        radial-gradient(circle at 70% 70%, var(--brand-1), transparent 60%),
+                        radial-gradient(circle at 70% 30%, var(--brand-2), transparent 60%),
+                        linear-gradient(135deg, var(--brand-1), var(--brand-2));
+            box-shadow: 0 10px 18px var(--shadow), inset 0 0 0 1px rgba(255,255,255,.2);
+        }
+        .brand h1 {
+            margin: 0; font-size: clamp(1.6rem, 3vw, 2.4rem);
+            letter-spacing: .5px; font-weight: 800;
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            text-shadow: 0 2px 18px rgba(255, 114, 167, 0.4);
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        nav a {
+            position: relative;
+            display: inline-block;
+            padding: .5rem .75rem;
+            font-weight: 600;
+            color: var(--muted);
+            transition: color 0.2s ease;
+        }
+        body.light-mode nav a { color: var(--text); }
+        nav a:hover { color: var(--text); }
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: .75rem;
+            right: .75rem;
+            bottom: .3rem;
+            height: 2px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--brand-1), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .25s ease;
+        }
+        nav a:hover::after { transform: scaleX(1); }
+        
+        /* Dropdown Styles */
+        .dropdown {
+            position: absolute;
+            top: 100%; left: 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px; display: none;
+            flex-direction: column;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            min-width: 180px; padding: 0.5rem 0;
+            z-index: 99;
+        }
+        .dropdown a { color: var(--text); padding: 0.6rem 1rem; white-space: nowrap; }
+        .dropdown a:hover { background: rgba(255,255,255,0.1); }
+        body.light-mode .dropdown a:hover { background: rgba(0,0,0,0.05); }
+        .nav-item { position: relative; } /* Added for positioning dropdown */
+        .nav-item:hover .dropdown { display: flex; }
+
+        /* --- 3. HAMBURGER MENU & THEME BUTTON STYLES --- */
+        .menu-btn {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 100;
+            background: transparent;
+            border: none;
+        }
+        .menu-btn span {
+            width: 25px; height: 3px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        /* Animation for hamburger to 'X' */
+        .menu-btn.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .menu-btn.is-open span:nth-child(2) { opacity: 0; }
+        .menu-btn.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .theme-btn {
+            background: none; border: none;
+            cursor: pointer; padding: 0.5rem;
+            color: var(--text);
+        }
+        .theme-btn .icon-moon { display: none; }
+        body.light-mode .theme-btn .icon-sun { display: none; }
+        body.light-mode .theme-btn .icon-moon { display: block; }
+        
+        .actions-container { display: flex; align-items: center; gap: 0.5rem; }
+
+        /* --- 4. RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .menu-btn { display: flex; }
+            nav {
+                position: absolute;
+                top: 100%; /* Position below header */
+                right: 0;
+                background: var(--card);
+                flex-direction: column;
+                width: 220px;
+                padding: 1rem;
+                border-radius: 0 0 8px 8px;
+                transform: translateY(-150%); /* Start off-screen */
+                transition: transform 0.3s ease-in-out;
+            }
+            nav.is-open {
+                transform: translateY(0); /* Slide into view */
+            }
+            nav a { margin: .5rem 0; }
+            .dropdown { position: static; background: none; box-shadow: none; border: none; }
+        }
+
+        /* --- 5. HERO & FOOTER --- */
+        .hero {
+            position: relative; overflow: hidden;
+            background: radial-gradient(1200px 600px at 0% 0%, var(--brand-2) 0%, transparent 60%),
+                        radial-gradient(900px 600px at 100% 20%, var(--brand-1) 0%, transparent 60%),
+                        linear-gradient(180deg, #1e293b 0%, #0f172a 80%);
+            min-height: 72vh; display: grid;
+            place-items: center; text-align: center;
+            padding: 6rem 1.25rem 4rem;
+        }
+        body.light-mode .hero {
+             background: radial-gradient(1200px 600px at 0% 0%, var(--brand-2) 0%, transparent 70%),
+                        radial-gradient(900px 600px at 100% 20%, var(--brand-1) 0%, transparent 70%),
+                        linear-gradient(180deg, #e2e8f0 0%, #f8fafc 80%);
+        }
+        .hero-inner { max-width: 1000px; }
+        .kicker { text-transform: uppercase; letter-spacing: .2em; font-size: .8rem; color: var(--muted); }
+        .display {
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            line-height: 1.05; margin: .5rem 0 1rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+            -webkit-background-clip: text;
+            background-clip: text; color: transparent;
+            text-shadow: 0 6px 28px rgba(210, 167, 255, 0.45);
+        }
+        .sub { max-width: 760px; margin: 0 auto 1.8rem; color: var(--muted); font-size: clamp(1rem, 1.8vw, 1.2rem); }
+        .cta {
+            display: inline-block; padding: .9rem 1.2rem;
+            border-radius: 999px; font-weight: 700;
+            background: linear-gradient(90deg, var(--brand-3), var(--accent));
+            color: white;
+            box-shadow: 0 10px 20px var(--ring), 0 1px 0 rgba(255,255,255,.15) inset;
+            transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+        }
+        .cta:hover { transform: translateY(-2px) scale(1.02); filter: saturate(1.05); box-shadow: 0 16px 26px var(--ring); }
+        .organs { position: absolute; inset: 0; pointer-events: none; opacity: .18; }
+        .organs span { position: absolute; font-size: clamp(28px, 3.6vw, 44px); filter: blur(.2px); }
+        .o1{ top: 10%; left: 8%; } .o2{ top: 20%; right: 12%; }
+        .o3{ top: 42%; left: 16%; } .o4{ top: 65%; right: 18%; }
+        .o5{ top: 28%; left: 52%; } .o6{ top: 75%; left: 8%; }
+        .o7{ top: 12%; left: 70%; } .o8{ top: 56%; left: 78%; }
+
+        footer { text-align: center; padding: 2.4rem 1.2rem; color: var(--muted); background: var(--card); transition: background-color 0.3s ease; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="frontpage.html" class="brand"> <div class="brand-logo" aria-hidden="true"></div>
+                <h1>LifeLink</h1>
+            </a>
+
+            <nav>
+                <a href="frontpage.html">Home</a>
+                <div class="nav-item">
+                    <a href="#">About Us ▾</a>
+                    <div class="dropdown">
+                        <a href="#mission">Our Mission</a>
+                        <a href="#">Our Vision</a>
+                        <a href="#team">Our Team</a>
+                        <a href="#values">Values</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+                <a href="#">Transplant Guide</a>
+                <a href="contactus.html">Contact Us</a>
+            </nav>
+
+            <div class="actions-container">
+                <button id="theme-toggle-btn" class="theme-btn" title="Toggle theme">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                
+                <button class="menu-btn" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="organs" aria-hidden="true">
+                <span class="o1">🫀</span><span class="o2">🫁</span><span class="o3">🧠</span>
+                <span class="o4">🦴</span><span class="o5">🧬</span><span class="o6">🩸</span>
+                <span class="o7">🫁</span><span class="o8">🫀</span>
+            </div>
+            <div class="hero-inner">
+                <div class="kicker">Organ Donation • Matching • Recovery</div>
+                <h2 class="display">Linking Organ donation and Patients via Hospital</h2>
+                <p class="sub">Register donors, manage patients, and coordinate hospital-wise transplants — all in one</p>
+                <a class="cta" href="loginpage.html">Get Started</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 LifeLink. Built with care.</p>
+    </footer>
+
+    <script>
+        // --- JAVASCRIPT FOR ALL FUNCTIONALITY ---
+
+        // 1. Hamburger Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const nav = document.querySelector('nav');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('is-open');
+            nav.classList.toggle('is-open');
+        });
+
+        // 2. Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const body = document.body;
+
+        // Function to apply the saved theme on page load
+        function applySavedTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+            }
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Save the current theme preference to localStorage
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.removeItem('theme'); // or set to 'dark'
+                localStorage.setItem('theme', 'dark'); // Explicitly set to dark
+            }
+        });
+
+        // Apply the theme when the page loads
+        document.addEventListener('DOMContentLoaded', applySavedTheme);
+    </script>
+    
+</body>
+</html>
