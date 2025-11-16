@@ -46,7 +46,7 @@ const LoginPage = () => {
           <h3>Donor</h3>
           <div className="options">
             <a href="/donor-login">Login</a>
-            <a href="/donor-register">Register</a>
+            <a href="/Donor-Register">Register</a>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ const LoginPage = () => {
           <h3>Patient</h3>
           <div className="options">
             <a href="/patient-login">Login</a>
-            <a href="/patient-register">Register</a>
+            <a href="/Patient-Register">Register</a>
           </div>
         </div>
 
@@ -62,7 +62,7 @@ const LoginPage = () => {
           <h3>Hospital</h3>
           <div className="options">
             <a href="/hospital-login">Login</a>
-            <a href="/hospital-register">Register</a>
+            <a href="/h0ospital-register">Register</a>
           </div>
         </div>
 

@@ -21,7 +21,7 @@ header {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1rem 3rem;
   z-index: 10;
@@ -38,17 +38,17 @@ header {
   max-width: 1300px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;  /* keep same */
+  justify-content: space-between;
   align-items: center;
 }
 
-
-
 .brand {
-  margin-left: 0;     /* left side fix */
-  transform: translateX(-30px); /* shift left as you like */
+  margin-left: 0;
+  transform: translateX(-30px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-
 
 .brand-logo {
   width: 40px;
@@ -124,27 +124,20 @@ nav a:hover {
   display: none;
 }
 
-.dark-mode nav a {
-  color: #d9ffe9;
-}
-
-.dark-mode .brand h1 {
-  color: #d9ffe9;
-}
-
 /* === Hero Section === */
 .hero {
-  height: 100vh;
+  padding-top: 160px;   /* header ke liye enough space */
+  min-height: 90vh;     /* perfect height, no overlap */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   background: url("../images/background.png") center/cover no-repeat;
-
   color: #0f381c;
   animation: fadeIn 1.2s ease-in;
 }
+
 
 .hero .slogan {
   font-size: 3rem;
@@ -218,153 +211,66 @@ nav a:hover {
   font-weight: 600;
 }
 
-/* === About Section === */
-.about {
-  padding: 5rem 2rem;
-  text-align: center;
-  background: transparent;
-}
-
+/* === About Grid === */
 .about-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 1rem 0;
 }
 
+/* === About Cards — Rolling Animation === */
 .about-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  background: #ffffff;
+  padding: 1.2rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  text-align: center;
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateX(-100px) rotate(-5deg);  /* start position */
   transition: all 0.8s ease;
 }
 
+/* When card becomes visible */
 .about-card.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0) rotate(0deg);        /* final position */
 }
 
-.about-card:nth-child(even) {
-  animation-delay: 0.2s;
-  transform: translateX(50px);
-}
+/* Staggered animation delay */
+.about-card:nth-child(1) { transition-delay: 0.0s; }
+.about-card:nth-child(2) { transition-delay: 0.15s; }
+.about-card:nth-child(3) { transition-delay: 0.30s; }
+.about-card:nth-child(4) { transition-delay: 0.45s; }
+.about-card:nth-child(5) { transition-delay: 0.60s; }
 
-.about-card:nth-child(odd) {
-  animation-delay: 0.4s;
-  transform: translateX(-50px);
-}
-
-/* === Animations === */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* === About Section (FIXED) === */
-.about {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: #0f381c10; /* very light green tint */
-}
-
-.about h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #0f381c;
-  font-weight: 700;
-}
-
-.about p {
-  max-width: 700px;
-  margin: 0 auto 3rem;
-  color: #2b4c34;
-  opacity: 0.9;
-  font-size: 1rem;
-}
-
-/* GRID FIX */
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-}
-
-/* CARD FIX */
-.about-card {
-  width: 260px;
-  background: #ffffff;
-  padding: 1.8rem;
-  border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.about-card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ICON FIX – smaller + centered */
+/* Icon */
 .about-card img {
-  width: 70px;
-  height: 70px;
-  margin-bottom: 1rem;
-  object-fit: contain;
-  filter: saturate(1.2);
+  width: 55px;
+  height: 55px;
+  margin-bottom: 0.7rem;
 }
 
+/* Title */
 .about-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
   font-weight: 600;
   color: #0f381c;
 }
 
+/* Description */
 .about-card p {
-  font-size: 0.9rem;
+  font-size: 0.78rem;
   color: #4a6b57;
 }
 
-/* Hover effect clean */
+/* Hover */
 .about-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
-}
-
-/* Dark mode fix */
-.dark-mode .about-card {
-  background: #0f2f1a;
-  color: #e0ffe9;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .about-card p {
-  color: #c9ffe2;
-}
-
-.dark-mode .about {
-  background: #06411d20;
-}
-
-.dark-mode .about h2 {
-  color: #caffe2;
+  transform: translateY(-8px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 
@@ -378,5 +284,75 @@ footer {
 .dark-mode footer {
   background: #082512;
 }
+
+/* ==========================================================
+   📱 RESPONSIVE DESIGN
+   ========================================================== */
+
+/* === Tablet (max-width: 900px) === */
+@media (max-width: 900px) {
+  .hero .slogan {
+    font-size: 2.4rem;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+}
+
+/* === Mobile (max-width: 600px) === */
+@media (max-width: 600px) {
+
+  /* NAVBAR FIX */
+  nav {
+    display: none;
+    flex-direction: column;
+    background: white;
+    position: absolute;
+    top: 75px;
+    right: 20px;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+  }
+
+  nav.is-open {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+    font-size: 1.8rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .brand {
+    transform: translateX(0);
+  }
+
+  /* HERO */
+  .hero .slogan {
+    font-size: 1.9rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    width: 90%;
+  }
+
+  /* ORGANS */
+  .organ img {
+    width: 110px;
+    height: 110px;
+  }
+
+  /* ABOUT */
+  .about-card {
+    width: 90%;
+  }
+}
+
 
 

@@ -1,318 +1,181 @@
-/* 🌿 LifeLink Unified Common CSS — Green Theme Edition */
+/* ================================================
+   🌿 LifeLink — AUTH PAGES LOCAL CSS (SAFE)
+   Applies ONLY inside <div class="auth-page">
+================================================ */
 
-/* Root Theme Variables */
-:root {
-  --bg: #f0fdf4;                /* light mint background */
-  --text: #064e3b;              /* deep green text */
-  --muted: #4b5563;             /* soft gray-green muted text */
-  --brand-1: #a7f3d0;           /* mint green */
-  --brand-2: #6ee7b7;           /* medium green */
-  --brand-3: #34d399;           /* vivid emerald */
-  --accent: #10b981;            /* button highlight green */
-  --card: rgba(255, 255, 255, 0.9);
+/* MAIN WRAPPER (LOCAL SCOPE) */
+.auth-page {
+  --bg: #f0fdf4;
+  --text: #064e3b;
+  --muted: #4b5563;
+  --brand-1: #a7f3d0;
+  --brand-2: #6ee7b7;
+  --brand-3: #34d399;
+  --accent: #10b981;
+  --card: rgba(255, 255, 255, 0.95);
   --shadow: rgba(0, 0, 0, 0.15);
   --ring: rgba(16, 185, 129, 0.3);
   --border: rgba(0, 0, 0, 0.08);
-}
 
-/* 🌙 Dark Mode (Automatic) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #022c22;               /* dark forest green */
-    --text: #d1fae5;             /* pale mint text */
-    --muted: #a7f3d0;
-    --card: rgba(6, 78, 59, 0.9);
-    --shadow: rgba(0, 0, 0, 0.6);
-    --ring: rgba(16, 185, 129, 0.45);
-    --border: rgba(255, 255, 255, 0.1);
-  }
-}
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px 0;
 
-/* Base Layout */
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: var(--text);
-  background: 
-    radial-gradient(1000px 600px at 0% 0%, var(--brand-2) 0%, transparent 70%),
-    radial-gradient(1000px 600px at 100% 0%, var(--brand-1) 0%, transparent 70%),
+  background:
+    radial-gradient(600px 300px at 10% 10%, var(--brand-2) 0%, transparent 70%),
+    radial-gradient(600px 300px at 90% 10%, var(--brand-1) 0%, transparent 70%),
     radial-gradient(1200px 800px at 50% 100%, var(--brand-3) 0%, transparent 80%),
     var(--bg);
-  line-height: 1.6;
-  min-height: 100vh;
-  transition: background 0.6s ease, color 0.6s ease;
-}
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: 0.2s ease;
-}
-a:hover { color: var(--accent); }
-
-/* Header / Navbar */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: saturate(180%) blur(14px);
-  background: rgba(240, 253, 244, 0.8);
-  border-bottom: 1px solid var(--border);
-}
-.nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.9rem 1.2rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.brand-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: radial-gradient(circle at 30% 30%, var(--brand-3), transparent 60%),
-              radial-gradient(circle at 70% 70%, var(--brand-1), transparent 60%),
-              radial-gradient(circle at 70% 30%, var(--brand-2), transparent 60%),
-              linear-gradient(135deg, var(--brand-1), var(--brand-2));
-  box-shadow: 0 10px 18px var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-.brand h1 {
-  margin: 0;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-nav a {
-  padding: 0.5rem 0.75rem;
-  margin-left: 0.25rem;
-  font-weight: 600;
-  color: #065f46;
-}
-nav a:hover { color: var(--accent); }
-
-/* Section Styling */
-.section {
-  max-width: 1200px;
-  margin: 3rem auto;
-  padding: 1rem;
-  text-align: center;
-}
-.title {
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  margin-bottom: 1rem;
-  background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.muted { color: var(--muted); }
-
-/* Buttons */
-.btn, .cta {
-  display: inline-block;
-  padding: 0.9rem 1.2rem;
-  border-radius: 999px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(90deg, var(--brand-3), var(--accent));
-  color: white;
-  box-shadow: 0 6px 16px var(--ring);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-}
-.btn:hover, .cta:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: saturate(1.08);
-  box-shadow: 0 12px 24px var(--ring);
+  justify-content: center;
+  align-items: flex-start;
+  animation: fadeInUp 0.6s ease;
 }
 
-/* Forms */
-form {
+/* FORM + LOGIN CARD */
+.auth-page .login-card,
+.auth-page form {
+  width: 92%;
   max-width: 600px;
-  margin: 2rem auto;
   background: var(--card);
   padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-  display: grid;
-  gap: 1rem;
+  border-radius: 18px;
+  box-shadow: 0 12px 24px var(--shadow);
+  backdrop-filter: blur(10px);
 }
-label {
+
+.auth-page .login-card {
+  max-width: 380px;
+  text-align: center;
+}
+
+/* TITLE */
+.auth-page h2 {
+  margin-bottom: 1.2rem;
+  font-size: 1.9rem;
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+/* INPUT GROUP */
+.auth-page label {
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: 5px;
   display: block;
   color: var(--muted);
 }
-input, select, textarea {
+
+.auth-page input,
+.auth-page select,
+.auth-page textarea {
   width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.1);
-  background: rgba(255,255,255,0.8);
+  border: 1px solid #cbd5e1;
+  background: #ffffffcc;
   color: var(--text);
   font-size: 1rem;
+  transition: 0.3s ease;
 }
-input:focus, select:focus, textarea:focus {
-  outline: none;
+
+.auth-page input:focus,
+.auth-page select:focus,
+.auth-page textarea:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--ring);
 }
 
-/* Checkbox Group */
-.checkbox-group {
+/* CHECKBOXES */
+.auth-page .checkbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem 1rem;
 }
-.checkbox-group label {
-  color: var(--text);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-.checkbox-group input[type="checkbox"] {
+
+.auth-page .checkbox-group input[type="checkbox"] {
   accent-color: var(--accent);
 }
-select option {
-  background-color: var(--card);
-  color: var(--text);
+
+/* BUTTON */
+.auth-page .btn,
+.auth-page button[type="submit"] {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, var(--brand-3), var(--accent));
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-/* Login / Register Card */
-.login-card {
+.auth-page .btn:hover,
+.auth-page button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px var(--ring);
+}
+
+/* LINKS */
+.auth-page .extra-links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.auth-page .extra-links a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.auth-page .extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* ROLE CARDS */
+.auth-page .roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 95%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.auth-page .role-card {
   background: var(--card);
+  border-radius: 18px;
+  padding: 2rem 1rem;
+  box-shadow: 0 10px 20px var(--shadow);
   border: 1px solid var(--border);
+  transition: 0.3s ease;
+}
+
+.auth-page .role-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3));
+  color: white;
+}
+
+.auth-card {
+  background: var(--card);
   border-radius: 20px;
   padding: 2.2rem;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 10px 20px var(--shadow);
-  backdrop-filter: blur(10px);
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(8px);
   text-align: center;
-  margin: 3rem auto;
-  animation: fadeInUp 0.6s ease;
-}
-.login-card h2 {
-  margin: 0 0 1rem;
-  font-size: 1.8rem;
-  background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.extra-links {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-.extra-links a {
-  color: var(--accent);
-  font-weight: 600;
 }
 
-/* Role Selection Page */
-.roles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  width: 90%;
-  max-width: 1000px;
-  margin: 2rem auto;
-}
-.role-card {
-  background: var(--card);
-  border-radius: 18px;
-  padding: 2rem 1rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.role-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 18px 30px var(--ring);
-  background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3));
-  color: #fff;
-}
-.role-card h3 {
-  margin: 0;
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-.options {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-.role-card:hover .options {
-  opacity: 1;
-  max-height: 200px;
-  margin-top: 1rem;
-}
-.options a {
-  display: block;
-  margin: 0.4rem auto;
-  padding: 0.7rem 1.2rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--brand-3), var(--accent));
-  color: white;
-  font-weight: 600;
-  text-decoration: none;
-  box-shadow: 0 6px 14px var(--ring);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  width: 70%;
-}
-.options a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px var(--ring);
-}
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem 1rem;
-  color: var(--muted);
-  margin-top: 3rem;
-  border-top: 1px solid var(--border);
-}
-
-/* Floating organs */
-.organs {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.1;
-}
-.organs span {
-  position: absolute;
-  font-size: clamp(28px, 3vw, 44px);
-}
-.o1 { top: 10%; left: 8%; }
-.o2 { top: 20%; right: 12%; }
-.o3 { top: 42%; left: 16%; }
-.o4 { top: 65%; right: 18%; }
-
-/* Animations */
+/* ANIMATION */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* Active nav link */
-nav a.active-link {
-  color: var(--accent);
-  font-weight: bold;
-  text-decoration: underline;
 }

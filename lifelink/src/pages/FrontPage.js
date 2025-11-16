@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import "../assets/css/FrontPage.css";
 
 const FrontPage = () => {
@@ -39,6 +41,9 @@ const FrontPage = () => {
     if (menuBtn) menuBtn.removeEventListener('click', toggleMenu);
     if (btn) btn.removeEventListener('click', toggleTheme);
   };
+
+
+
 }, []);
 
 
@@ -48,14 +53,18 @@ const FrontPage = () => {
         <div className="nav-container">
           <a href="/" onClick={(e) => e.preventDefault()}>brand</a>
 
+            <div className="brand">
             <div className="brand-logo"></div>
             <h1>LifeLink</h1>
+            </div>
+
   
           <nav>
             <a href="#hero">Home</a>
             <a href="#about">About</a>
             <a href="#organs-section">Transplant Guide</a>
-            <a href="/" onClick={(e) => e.preventDefault()}>Contact</a>
+            <Link to="/contact">Contact</Link>
+
           </nav>
           <div className="actions-container">
             <button id="theme-toggle-btn" title="Toggle theme"></button>

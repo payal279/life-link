@@ -150,3 +150,58 @@ h2 {
 .login-page.dark-mode .role-card h3 {
   color: #eafff1;
 }
+
+/* =====================================================
+   📱 RESPONSIVE DESIGN (Mobile + Tablet)
+   ===================================================== */
+
+/* Medium devices (tablets) */
+@media (max-width: 900px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .role-card {
+    padding: 1.6rem 1rem;
+  }
+}
+
+/* Small devices (phones) */
+@media (max-width: 600px) {
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .roles {
+    grid-template-columns: 1fr; /* single column on phone */
+    gap: 1.5rem;
+    width: 85%;
+  }
+
+  .role-card {
+    width: 100%;
+    padding: 1.4rem 1rem;
+  }
+
+  .role-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .options a {
+    padding: 0.7rem 1rem;
+    width: 80%;
+  }
+
+  #theme-toggle-btn {
+    width: 50px;
+    height: 26px;
+  }
+
+  #theme-toggle-btn::before {
+    width: 20px;
+    height: 20px;
+  }
+}
+
