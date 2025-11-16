@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Team | LifeLink</title>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --brand1: #f4a7c5;
+      --brand2: #c6b6f3;
+      --brand3: #8fd3f4;
+      --accent: #ff72a7;
+      --card: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--brand1), var(--brand3));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      background: linear-gradient(135deg, var(--brand2), var(--brand1));
+      color: var(--bg);
+      animation: gradientShift 10s ease infinite;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Team Section */
+    .team-container {
+      max-width: 1100px;
+      margin: 4rem auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .team-member {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .team-member.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(255, 114, 167, 0.3);
+    }
+
+    .team-member img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .team-member h3 {
+      margin: 0.5rem 0 0.3rem;
+      background: linear-gradient(90deg, var(--brand1), var(--brand3));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .team-member p.role {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .team-member p.bio {
+      font-size: 0.95rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(255, 255, 255, 0.05);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      margin-top: 3rem;
+    }
+
+    /* Animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>LifeLink</h1>
+    <nav>
+      <a href="frontpage.html">Home</a>
+      <a href="mission.html">Our Mission</a>
+      <a href="team.html">Our Team</a>
+      <a href="contactus.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Meet Our Team</h2>
+    <p>The dedicated individuals behind LifeLink — connecting lives, one donation at a time.</p>
+  </section>
+
+  <section class="team-container">
+    <div class="team-member">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Aisha Sharma">
+      <h3>Dr. Aisha Sharma</h3>
+      <p class="role">Founder & Medical Director</p>
+      <p class="bio">Leading our mission with a vision of connecting hospitals and patients through technology and compassion.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Raj Mehta">
+      <h3>Raj Mehta</h3>
+      <p class="role">Lead Developer</p>
+      <p class="bio">Full-stack engineer ensuring our digital infrastructure remains reliable, fast, and secure.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya Nair">
+      <h3>Priya Nair</h3>
+      <p class="role">Design Head</p>
+      <p class="bio">Creating meaningful, intuitive user experiences that blend compassion with clarity.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="https://randomuser.me/api/portraits/men/70.jpg" alt="Dr. Arjun Patel">
+      <h3>Dr. Arjun Patel</h3>
+      <p class="role">Transplant Specialist</p>
+      <p class="bio">Bridging medical expertise with innovation to make organ matching simpler and faster.</p>
+    </div>
+
+    <div class="team-member">
+      <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Sana Iqbal">
+      <h3>Sana Iqbal</h3>
+      <p class="role">Public Relations</p>
+      <p class="bio">Building awareness and community trust through impactful campaigns and storytelling.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 LifeLink. Built with compassion and collaboration.</p>
+  </footer>
+
+  <script>
+    // Scroll-in animation for team members
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.team-member').forEach(member => observer.observe(member));
+  </script>
+
+</body>
+</html>

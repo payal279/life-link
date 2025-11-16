@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LifeLink • Choose Your Role</title>
-  <style>
     /* 🌿 Matching Green Theme from Front Page */
     :root {
       --bg: #f8fff9;
@@ -134,40 +127,6 @@
 
     .role-card:nth-child(1) { animation-delay: 0.1s; }
     .role-card:nth-child(2) { animation-delay: 0.2s; }
+
     .role-card:nth-child(3) { animation-delay: 0.3s; }
     .role-card:nth-child(4) { animation-delay: 0.4s; }
-  </style>
-</head>
-<body>
-  <h2>Choose Your Role</h2>
-  <div class="roles">
-    <div class="role-card">
-      <h3>Donor</h3>
-      <div class="options">
-        <a href="donor-login.html">Login</a>
-        <a href="donor-register.html">Register</a>
-      </div>
-    </div>
-    <div class="role-card">
-      <h3>Patient</h3>
-      <div class="options">
-        <a href="patient-login.html">Login</a>
-        <a href="patient-register.html">Register</a>
-      </div>
-    </div>
-    <div class="role-card">
-      <h3>Hospital</h3>
-      <div class="options">
-        <a href="hospital-login.html">Login</a>
-        <a href="hospital-register.html">Register</a>
-      </div>
-    </div>
-    <div class="role-card">
-      <h3>Admin</h3>
-      <div class="options">
-        <a href="admin-login.html">Login</a>
-      </div>
-    </div>
-  </div>
-</body>
-</html>

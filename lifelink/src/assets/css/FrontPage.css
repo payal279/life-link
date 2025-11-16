@@ -1,0 +1,382 @@
+/* === Global Styles === */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #e9f8ef, #d2f3e0);
+  color: #1c1c1c;
+  overflow-x: hidden;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+.dark-mode {
+  background: linear-gradient(135deg, #0f2f1a, #06411d);
+  color: #f1f1f1;
+}
+
+/* === Header === */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  z-index: 10;
+  transition: 0.3s;
+}
+
+.dark-mode header {
+  background: rgba(10, 30, 15, 0.7);
+}
+
+/* === Fix Navbar Layout === */
+.nav-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;  /* keep same */
+  align-items: center;
+}
+
+
+
+.brand {
+  margin-left: 0;     /* left side fix */
+  transform: translateX(-30px); /* shift left as you like */
+}
+
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2ecc71, #16a085);
+}
+
+.brand h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f381c;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav a {
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 10px;
+  color: #0f381c;
+  transition: 0.3s ease;
+}
+
+nav a:hover {
+  color: #00b97d;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* === Theme Toggle Switch === */
+#theme-toggle-btn {
+  width: 55px;
+  height: 28px;
+  background: #00b97d;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: 0.4s ease;
+}
+
+#theme-toggle-btn::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  top: 3px;
+  left: 4px;
+  transition: 0.4s ease;
+}
+
+.dark-mode #theme-toggle-btn {
+  background: #06411d;
+}
+
+.dark-mode #theme-toggle-btn::before {
+  left: 29px;
+  background: #d9ffe9;
+}
+
+.menu-btn {
+  display: none;
+}
+
+.dark-mode nav a {
+  color: #d9ffe9;
+}
+
+.dark-mode .brand h1 {
+  color: #d9ffe9;
+}
+
+/* === Hero Section === */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url("../images/background.png") center/cover no-repeat;
+
+  color: #0f381c;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.hero .slogan {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #0a3d1e;
+  animation: slideInDown 1s ease-out;
+}
+
+.hero p {
+  max-width: 600px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.cta {
+  margin-top: 1.5rem;
+  background-color: #00b97d;
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cta:hover {
+  transform: scale(1.08);
+  background-color: #009f6a;
+}
+
+/* === Organs Section === */
+.organs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 3rem 1rem;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+.organs.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.organ {
+  margin: 1rem;
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.organ img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.organ:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 200, 100, 0.6);
+}
+
+.organ span {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* === About Section === */
+.about {
+  padding: 5rem 2rem;
+  text-align: center;
+  background: transparent;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.about-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.about-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-card:nth-child(even) {
+  animation-delay: 0.2s;
+  transform: translateX(50px);
+}
+
+.about-card:nth-child(odd) {
+  animation-delay: 0.4s;
+  transform: translateX(-50px);
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* === About Section (FIXED) === */
+.about {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #0f381c10; /* very light green tint */
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #0f381c;
+  font-weight: 700;
+}
+
+.about p {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: #2b4c34;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* GRID FIX */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+/* CARD FIX */
+.about-card {
+  width: 260px;
+  background: #ffffff;
+  padding: 1.8rem;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.about-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ICON FIX – smaller + centered */
+.about-card img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  filter: saturate(1.2);
+}
+
+.about-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  color: #0f381c;
+}
+
+.about-card p {
+  font-size: 0.9rem;
+  color: #4a6b57;
+}
+
+/* Hover effect clean */
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode fix */
+.dark-mode .about-card {
+  background: #0f2f1a;
+  color: #e0ffe9;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .about-card p {
+  color: #c9ffe2;
+}
+
+.dark-mode .about {
+  background: #06411d20;
+}
+
+.dark-mode .about h2 {
+  color: #caffe2;
+}
+
+
+/* === Footer === */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #c9f2d9;
+}
+
+.dark-mode footer {
+  background: #082512;
+}
+
+
