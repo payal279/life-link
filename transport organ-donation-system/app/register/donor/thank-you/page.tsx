@@ -70,7 +70,7 @@ export default function DonorThankYouPage() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8">
           <Link href="/" className="flex items-center justify-center mb-4">
             <Heart className="h-8 w-8 text-red-500" />
-            <span className="ml-2 text-xl font-bold text-gray-900">In-Need</span>
+            <span className="ml-2 text-xl font-bold text-gray-900">Life-Link</span>
           </Link>
           <div className="bg-green-100 p-4 rounded-full">
             <CheckCircle className="h-16 w-16 text-green-600" />
